@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import {
   View,
   Text,
@@ -8,12 +9,18 @@ import {
   TouchableNativeFeedback,
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SpiceItem from "../components/SpiceItem";
 import Colors from "../constants/Colors";
+import * as spiceActions from "../store/spiceAction";
 
 const UserSpices = (props) => {
   const userSpiceList = useSelector((state) => state.spices.userSpices);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(spiceActions.loadSpices());
+  }, [dispatch]);
 
   const spice = (itemData) => {
     return (
@@ -36,7 +43,7 @@ const UserSpices = (props) => {
         data={userSpiceList}
         renderItem={spice}
         numColumns={1}
-        contentContainerStyle={{ margin: 40 }}
+        // contentContainerStyle={{ margin: 40 }}
       />
     </View>
   );
@@ -49,10 +56,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginHorizontal: 2,
-    marginVertical: 2,
+    // marginVertical: 2,
     height: 40,
     borderWidth: 0.5,
-    borderColor: Colors.primary,
+    borderColor: Colors.secondary,
   },
 });
 
