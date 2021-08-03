@@ -3,8 +3,8 @@ import Spice from "../models/Spice";
 import { SET_SPICES, ADD_SPICE } from "./spiceAction";
 
 const initialState = {
-  // masterSpices: SPICES,
-  userSpices: SPICES,
+  masterSpices: SPICES,
+  userSpices: [],
 };
 
 const spiceReducer = (state = initialState, action) => {

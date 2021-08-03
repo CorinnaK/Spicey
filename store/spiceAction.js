@@ -24,6 +24,7 @@ export const loadSpices = () => {
   return async (dispatch) => {
     try {
       const dbResult = await fetchSpices();
+      console.log(dbResult.rows._array);
       dispatch({ type: SET_SPICE, userSpices: dbResult.rows._array });
     } catch (err) {
       console.log(err);

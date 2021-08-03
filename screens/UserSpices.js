@@ -10,6 +10,9 @@ import {
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { useDispatch, useSelector } from "react-redux";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+
+import HeaderButton from "../components/HeaderButton";
 import SpiceItem from "../components/SpiceItem";
 import Colors from "../constants/Colors";
 import * as spiceActions from "../store/spiceAction";
@@ -17,6 +20,23 @@ import * as spiceActions from "../store/spiceAction";
 const UserSpices = (props) => {
   const userSpiceList = useSelector((state) => state.spices.userSpices);
   const dispatch = useDispatch();
+
+  React.useLayoutEffect(() => {
+    props.navigation.setOptions({
+      title: "My Spices",
+      headerLeft: () => (
+        <HeaderButtons HeaderButtonComponent={HeaderButton}>
+          <Item
+            title="Menu"
+            iconName={"md-menu"}
+            onPress={() => {
+              props.navigation.toggleDrawer();
+            }}
+          />
+        </HeaderButtons>
+      ),
+    });
+  });
 
   useEffect(() => {
     dispatch(spiceActions.loadSpices());
@@ -39,12 +59,7 @@ const UserSpices = (props) => {
 
   return (
     <View style={styles.screen}>
-      <FlatList
-        data={userSpiceList}
-        renderItem={spice}
-        numColumns={1}
-        // contentContainerStyle={{ margin: 40 }}
-      />
+      <FlatList data={userSpiceList} renderItem={spice} numColumns={1} />
     </View>
   );
 };
@@ -56,7 +71,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginHorizontal: 2,
-    // marginVertical: 2,
     height: 40,
     borderWidth: 0.5,
     borderColor: Colors.secondary,
