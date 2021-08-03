@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, ImageBackground } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  ImageBackground,
+  ScrollView,
+} from "react-native";
 import { useSelector } from "react-redux";
 
 import FooterButton from "../components/FooterButtons";
@@ -8,9 +15,13 @@ import CustomTextCmp from "../components/CustomTextCmp";
 const SpiceDetails = (props) => {
   const spiceId = props.route.params.spiceId;
   const spice = useSelector((state) =>
-    state.spices.userSpices.find((spice) => spice.id === spiceId)
+    state.spices.masterSpices.find((spice) => spice.id === spiceId)
   );
-
+  if (!spice) {
+    spice = useSelector((state) =>
+      state.spices.userSpices.find((spice) => spice.id === spiceId)
+    );
+  }
   return (
     <View>
       <Text style={styles.title}>{spice.name}</Text>
@@ -20,16 +31,16 @@ const SpiceDetails = (props) => {
       >
         <View style={styles.screen}>
           <View style={styles.imageContainer}></View>
-          <View style={styles.textContainer}>
+
+          <ScrollView style={styles.textContainer}>
             <CustomTextCmp style={styles.text}>
               {spice.description}
             </CustomTextCmp>
-          </View>
+          </ScrollView>
 
           {/* TODO ---- Add Icon here for shopping cart - add to shopping cart */}
-
           {spice.amount === 0 ? (
-            <Text>Empty</Text>
+            <Text></Text>
           ) : (
             <Image
               style={styles.imageShaker}
@@ -58,7 +69,11 @@ const styles = StyleSheet.create({
     padding: 20,
     borderColor: "#2A9E00",
     borderWidth: 0.5,
+    maxHeight: 150,
+    overflow: "hidden",
   },
+  text: {},
+
   image: {
     height: "100%",
     width: "100%",
