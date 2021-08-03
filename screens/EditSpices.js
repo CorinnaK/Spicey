@@ -1,8 +1,14 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-const UserSpices = (props) => {};
+const EditSpices = (props) => {
+  return (
+    <View>
+      <Text>Hello edit spice</Text>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({});
 
-export default UserSpices;
+export default EditSpices;
