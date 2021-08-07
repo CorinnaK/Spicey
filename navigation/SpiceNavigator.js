@@ -7,6 +7,8 @@ import UserSpices from "../screens/UserSpices";
 import SpiceDetails from "../screens/SpiceDetails";
 import AllSpices from "../screens/AllSpices";
 import Colors from "../constants/Colors";
+import EditSpices from "../screens/EditSpices";
+import AddSpices from "../screens/AddSpices";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -27,6 +29,8 @@ const SpiceNavigator = () => {
       <Stack.Screen name="UserSpices" component={UserSpices} />
       <Stack.Screen name="SpiceDetails" component={SpiceDetails} />
       <Stack.Screen name="AllSpices" component={AllSpices} />
+      <Stack.Screen name="EditSpices" component={EditSpices} />
+      <Stack.Screen name="AddSpices" component={AddSpices} />
     </Stack.Navigator>
   );
 };

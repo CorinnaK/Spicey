@@ -35,6 +35,17 @@ const UserSpices = (props) => {
           />
         </HeaderButtons>
       ),
+      headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={HeaderButton}>
+          <Item
+            title="Add"
+            iconName={"md-add"}
+            onPress={() => {
+              props.navigation.navigate("AddSpices");
+            }}
+          />
+        </HeaderButtons>
+      ),
     });
   });
 
